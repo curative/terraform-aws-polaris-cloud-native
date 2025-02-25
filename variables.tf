@@ -95,3 +95,9 @@ variable "rsc_credentials" {
   type        = string
   description = "Path to the Rubrik Security Cloud service account file."
 }
+
+variable "tags" {
+    type        = map(string)
+    description = "Tags to apply to the AWS resources."
+    default = {}
+}

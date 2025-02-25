@@ -70,6 +70,8 @@ resource "aws_iam_role" "rsc_roles" {
       policy = inline_policy.value["policy"]
     }
   }
+
+    tags = var.tags
 }
 
 # Create the required IAM instance profiles.
@@ -77,6 +79,7 @@ resource "aws_iam_instance_profile" "profile" {
   for_each    = data.polaris_aws_cnp_artifacts.artifacts.instance_profile_keys
   name_prefix = "rubrik-${lower(each.key)}-"
   role        = aws_iam_role.rsc_roles[each.value].name
+  tags = var.tags
 }
 
 # Attach the instance profiles and the roles to the RSC cloud account.
